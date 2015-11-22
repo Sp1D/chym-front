@@ -1,0 +1,93 @@
+.poster {    
+    width: 230px;    
+}
+
+.poster:hover {    
+    /*opacity: 0.95;*/
+}
+
+.descposter {
+    width: 300px;
+    height: auto;
+    float: left;
+    background-color: #269abc;
+    margin-right: 10px;
+}
+
+.descdesc {
+    clear:both;
+    padding: 5px 10px;
+    background-color: #d58512;
+}
+
+.desctext {    
+    padding: 5px 10px;
+    background-color: #d6e9c6;        
+
+}
+
+.rating {
+    position: relative;
+    top: 40px;
+    /*    background-color: black;
+        color: white;*/
+    font-size: larger;
+}
+
+.btn-poster {
+    width: 103px;
+}
+
+.epiepisode {
+    float:left;
+    width:auto;
+    height:auto;
+    font-size: xx-large;
+    padding: 0px;
+    
+    position: relative;
+    left: -15px;
+}
+
+.episeason {
+    float:left; 
+    background-color: #f0ad4e; 
+    font-size: xx-large; 
+    width: auto; 
+    padding-left: 5px; 
+    padding-right: 5px; 
+    left: -25px; 
+    position: relative; 
+}
+
+.episeries {
+    float:left;     
+    font-size: xx-large; 
+    width: auto; 
+/*    padding-left: 5px; 
+    padding-right: 5px; */
+    left: -40px; 
+    position: relative; 
+}
+
+.epiposter-img {
+    width:100px;
+    /*height: auto;*/
+    float:left; 
+    margin-right: 15px;    
+}
+
+.epiposter {
+    width:100px;
+    /*height: auto;*/
+    float:left; 
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+
+
+.btn-episode {
+    width:100px;
+}
+
