@@ -74,6 +74,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -116,6 +118,14 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring-version}</version>
         </dependency>  
+        
+        <!-- thymeleaf -->        
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
+            
         
         <!-- servlet api -->  
         <dependency>

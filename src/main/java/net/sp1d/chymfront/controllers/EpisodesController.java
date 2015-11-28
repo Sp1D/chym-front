@@ -20,25 +20,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 /**
  *
  * @author sp1d
  */
 @Controller
 public class EpisodesController {
-    
+
     @Autowired
     EpisodeRepo episodeRepo;
-    
+
     @Autowired
     MovieRepo movieRepo;
-        
+
     @RequestMapping("/episodes/{seriesId}")
-    public String getEpisodes(@PathVariable(value = "seriesId") String seriesId, Model model) {     
+    public String getEpisodes(@PathVariable(value = "seriesId") String seriesId, Model model) {
+
+//        Sort episodes in reverse order for more convenient visibility
         List<Episode> sortedEpisodes = episodeRepo.findBySeriesID(seriesId);
-        sortedEpisodes.sort(new Comparator<Episode>(){
+        sortedEpisodes.sort(new Comparator<Episode>() {
             @Override
             public int compare(Episode o1, Episode o2) {
                 if (o1 == null || o2 == null) {
@@ -46,24 +46,25 @@ public class EpisodesController {
                 }
                 int o1num = o1.getSeason() * 100 + o1.getEpisode();
                 int o2num = o2.getSeason() * 100 + o2.getEpisode();
-                return o1num - o2num;
+                return o2num - o1num;
             }
-            
+
         });
+
+//        Shitty getting last season number
         MovieFull movie = movieRepo.findByimdbID(seriesId);
         AbstractTracker tracker = movie.getTorrents().get(0).getTracker();
         String localId = movie.getTorrents().get(0).getLocalId();
-        
         int lastSeason = tracker.getLastSeasonByLocalId(localId);
-        
-        Map<Integer,Integer> episodesInSeasons = new HashMap<>();
+
+//      Getting number of episodes in every season
+        Map<Integer, Integer> episodesInSeasons = new HashMap<>();
         for (Episode episode : sortedEpisodes) {
             if (episode.getEpisode() > episodesInSeasons.getOrDefault(episode.getSeason(), 0)) {
                 episodesInSeasons.put(episode.getSeason(), episode.getEpisode());
             }
-            
         }
-        
+
         model.addAttribute("episodesList", sortedEpisodes);
         model.addAttribute("seriesTitle", movie.getTitle());
         model.addAttribute("lastSeason", lastSeason);

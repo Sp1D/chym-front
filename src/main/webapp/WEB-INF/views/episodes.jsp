@@ -17,40 +17,44 @@
 
             <style type="text/css">
                 body {
-                    padding-top: 60px;
-                    padding-bottom: 40px;
-                    padding-left: 100px;
-                    padding-right: 50px;
+                    padding-top: 5%;
+                    padding-bottom: 5%;
+                    padding-left: 10%;
+                    padding-right: 5%;
                 }
             </style>
         </head>
         <body>
+            <!--<a class="episeries epiback" href="<c:url value="/" />"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>-->
             <div class="episeries"><c:out value="${seriesTitle}"/></div>
         <div style="clear:left; height:15px;"></div>
+
         <c:forEach var="seasonNumber" begin="1" end="${lastSeason}">
-            <div class="episeason"><c:out value="${seasonNumber}"/>&nbsp;season</div>
+            <c:set var="season" value="${lastSeason-seasonNumber+1}"/>
+
+            <div class="episeason"><c:out value="${season}"/>&nbsp;season</div>
             <div style="clear:left; height:20px;"></div>
 
             <c:forEach var="episode" items="${episodesList}">
-                <c:if test="${episode.getSeason() == seasonNumber && episode.getEpisode() <= episodesInSeasonsMap.get(seasonNumber)}">
+                <c:if test="${episode.getSeason() == season}">
                     <div class="row">
                         <div class="col-lg-12">                
                             <div class="epiepisode"><c:out value="${episode.getEpisode()}"/></div>
                             <div class="epiposter">
-                                <img class="epiposter-img" src="<c:url value="${episode.getPoster()}"/>">
-                                <div style="float:left;">
+                                <img class="epiposter-img" src="<c:url value="${episode.getPoster()}"/>" alt="poster">
+                                <div class="btn-group">
                                     <button class="btn  btn-success dropdown-toggle btn-sm btn-episode" data-toggle="dropdown">Download <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Lostfilm HD1080</a></li>
-                                        <li><a href="#">Lostfilm HD720</a></li>                                                        
-                                        <li><a href="#">Lostfilm SD</a></li>
+                                        <c:forEach var="torrent" items="${episode.getTorrents()}">
+                                            <li><a href="<c:url value="${torrent.getTorrent()}"/>"><c:out value="${torrent.getTracker().getName()}"/>&nbsp;<c:out value="${torrent.getQuality()}"/> </a></li>                                        
+                                            </c:forEach>
                                     </ul>                    
                                 </div>
 
                             </div>
                             <div style="">
                                 <p><strong><c:out value="${episode.getTitle()}"/></strong><br><span class="glyphicon glyphicon-time"></span><em>&nbsp;<c:out value="${episode.getReleased()}"/></em><br>
-                                    <c:out value="${episode.getPlot()}"/>
+                                        <c:out value="${episode.getPlot()}"/>
                                 </p>
                             </div>
 
