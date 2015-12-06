@@ -6,8 +6,10 @@
 package net.sp1d.chymfront.controllers;
 
 import java.util.Calendar;
+import javax.servlet.http.HttpServletRequest;
 import net.sp1d.chym.entities.User;
 import net.sp1d.chym.repos.UserRepo;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,35 +24,44 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  */
 @Controller
 @RequestMapping("/login")
-@SessionAttributes("user")
+//@SessionAttributes("user")
 public class LoginController {
     
-    @Autowired UserRepo userRepo; 
-    
+    Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    UserRepo userRepo;
+
     @ModelAttribute
-    public User getUser(){
+    public User getUser() {
         return new User();
     }
-    
+
     @RequestMapping(method = RequestMethod.GET)
-    public String loginForm(){
+    public String loginForm() {
         return "login";
     }
-    
+
     @RequestMapping(method = RequestMethod.POST)
-    public String login(@ModelAttribute User user, Model model){
-        User actualUser = userRepo.findByEmail(user.getEmail());
-        if (actualUser == null) {
+    public String login(@ModelAttribute User user, Model model, HttpServletRequest request) {
+        User savedUser = userRepo.findByEmail(user.getEmail());
+        if (savedUser == null) {
             model.addAttribute("userNotExists", true);
             return "login";
         }
-        if (!actualUser.getPassword().equals(user.getPassword())) {
-            model.addAttribute("passwordMismatch", true);
-            return "login";
-        }        
-        actualUser.setLastVisit(Calendar.getInstance().getTime());
-        actualUser = userRepo.saveAndFlush(actualUser);
-        model.addAttribute("user", actualUser);
+        try {
+            if (!savedUser.getSecret().equals(new String(Butler.crypt(user), "UTF-8"))) {
+                model.addAttribute("passwordMismatch", true);
+                return "login";
+            }
+        } catch (Exception e){
+            log.error("Can not check entered password", e);
+        }
+        savedUser.setLastVisit(Calendar.getInstance().getTime());
+        savedUser = userRepo.saveAndFlush(savedUser);
+        request.getSession().invalidate();
+//        model.addAttribute("user", savedUser);
+        request.getSession().setAttribute("user", savedUser);
         return "redirect:/";
     }
 }

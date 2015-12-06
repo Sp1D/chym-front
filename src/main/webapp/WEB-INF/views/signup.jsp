@@ -43,7 +43,7 @@
                             </div>
                             <div class="form-group">                                
                                 <form:label path="username" cssClass="control-label">Username</form:label>
-                                <form:input  path="username" cssClass="form-control" maxlength="${settings['user.username.maxsize']}" required="required"/>
+                                <form:input  type="text" path="username" cssClass="form-control" maxlength="${settings['user.username.maxsize']}" required="required"/>
                                 <%--<form:errors path="username"/>--%>
                             </div>
                             <div class="form-group">

@@ -10,17 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import net.sp1d.chym.entities.User;
 import net.sp1d.chym.repos.UserRepo;
 import net.sp1d.chymfront.Settings;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -28,8 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/signup")
-@SessionAttributes(value = "user")
+//@SessionAttributes(value = "user")
 public class SignUpController {
+    
+    Logger log = org.slf4j.LoggerFactory.getLogger(getClass());
 
     @Autowired
     UserRepo userRepo;
@@ -55,10 +55,19 @@ public class SignUpController {
         if (result.hasErrors()) {
             return "signup";
         } else {
-            user.setLastVisit(Calendar.getInstance().getTime());
+            user.setLastVisit(Calendar.getInstance().getTime());            
+            
+            try {
+                byte[] hash = Butler.crypt(user);
+                user.setSecret(new String(hash, "UTF-8"));
+            } catch (Exception ex) {
+                log.error("Can not generate password hash", ex);                
+            }            
             User loggedUser = userRepo.saveAndFlush(user);
-            model.addAttribute("user", loggedUser);
-            request.changeSessionId();
+//            request.changeSessionId();
+            request.getSession().invalidate();
+            request.getSession().setAttribute("user", loggedUser);
+//            model.addAttribute("user", loggedUser);            
             return "registered";
         }
     }

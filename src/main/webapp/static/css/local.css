@@ -4,7 +4,7 @@ label.form-error, span.form-error {
 
 .form-error {    
     border-color: #d9534f;
-    
+
 }
 
 
@@ -12,22 +12,22 @@ label.form-error, span.form-error {
 
 .poster {    
     width: 230px;    
-    
+    z-index: 5;        
+    min-width: 230px;
+    min-height: 100px;
+    text-align: center;
 }
 
 .poster:hover {    
-    /*opacity: 0.95;*/
+    /*opacity: 0.85;*/
 }
 
 .movtitle {
-    
+
     font-size: xx-large; 
-    width: auto; 
-/*    padding-left: 5px; 
-    padding-right: 5px; */
-    /*left: -40px;*/ 
+    width: auto;    
     position: relative; 
-margin-top: 25px;
+    margin-top: 25px;
 }
 
 .descposter {
@@ -40,22 +40,49 @@ margin-top: 25px;
 .descdesc {
     clear:both;
     padding: 5px 10px;
-    
+
 }
 
 .desctext {    
     padding: 5px 10px;
-        
+
 
 }
 
 .rating {
     position: relative;
-    float:left;
-    top: 40px;
-    /*    background-color: black;
-        color: white;*/
-    font-size: larger;
+    top: 75px;
+    font-size: x-large;
+    z-index: 10;        
+    width:fit-content;
+}
+
+.icon-favorite{
+/*       color: #d9534f;  */
+}
+
+.label-white {
+  background-color: white;
+}
+
+.favorite {
+    position: relative;
+    top: 85px;    
+    font-size: x-large;
+    z-index: 10;  
+    margin-right: auto;
+    width:fit-content;
+}
+
+
+
+.icon-love {     
+    color: #d9534f;  
+}
+
+.icon-love:hover {     
+    /*color: white;*/
+    content: "\e056";
 }
 
 .btn-poster {
@@ -68,7 +95,7 @@ margin-top: 25px;
     height:auto;
     font-size: xx-large;
     padding: 0px;
-    
+
     position: relative;
     left: -30px;
 }
@@ -87,9 +114,7 @@ margin-top: 25px;
 .episeries {
     float:left;     
     font-size: xx-large; 
-    width: auto; 
-/*    padding-left: 5px; 
-    padding-right: 5px; */
+    width: auto;     
     left: -40px; 
     position: relative; 
 }
