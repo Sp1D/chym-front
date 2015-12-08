@@ -1,3 +1,15 @@
+body {
+    /*padding-top: 5%;*/
+    padding-top: 30px;
+    padding-bottom: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+#pagination {
+    /*margin-bottom: 3px;*/
+}
+
 label.form-error, span.form-error {    
     color: #d9534f;
 }
@@ -7,14 +19,28 @@ label.form-error, span.form-error {
 
 }
 
+.movie {
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    
+    
+}
+
+.poster {
+    width: 230px;
+    height: 340px;
+    /*background-color: #172a3c;*/
+    background-color: #4e5d6c;
+}
 
 
+.poster img {    
+    max-width: 100%;
+    /*max-height: 100%;*/
 
-.poster {    
-    width: 230px;    
     z-index: 5;        
-    min-width: 230px;
-    min-height: 100px;
+
     text-align: center;
 }
 
@@ -58,11 +84,11 @@ label.form-error, span.form-error {
 }
 
 .icon-favorite{
-/*       color: #d9534f;  */
+    /*       color: #d9534f;  */
 }
 
 .label-white {
-  background-color: white;
+    background-color: white;
 }
 
 .favorite {
@@ -86,7 +112,8 @@ label.form-error, span.form-error {
 }
 
 .btn-poster {
-    width: 103px;
+    width: 230px;
+    
 }
 
 .epiepisode {
@@ -144,3 +171,8 @@ label.form-error, span.form-error {
     width:100px;
 }
 
+@media (min-width: 1200px) {
+  .container {
+    width: 1670px;
+  }
+}

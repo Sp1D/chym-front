@@ -5,6 +5,7 @@
  */
 package net.sp1d.chymfront.controllers;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -53,9 +54,9 @@ public class EpisodesController {
 
 //        Shitty getting last season number
         MovieFull movie = movieRepo.findByimdbID(seriesId);
-        AbstractTracker tracker = movie.getTorrents().get(0).getTracker();
-        String localId = movie.getTorrents().get(0).getLocalId();
-        int lastSeason = tracker.getLastSeasonByLocalId(localId);
+//        AbstractTracker tracker = movie.getTorrents().get(0).getTracker();
+//        String localId = movie.getTorrents().get(0).getLocalId();
+//        int lastSeason = tracker.getLastSeasonByLocalId(localId);
 
 //      Getting number of episodes in every season
         Map<Integer, Integer> episodesInSeasons = new HashMap<>();
@@ -64,6 +65,7 @@ public class EpisodesController {
                 episodesInSeasons.put(episode.getSeason(), episode.getEpisode());
             }
         }
+        int lastSeason = Collections.max(episodesInSeasons.keySet());
 
         model.addAttribute("episodesList", sortedEpisodes);
         model.addAttribute("seriesTitle", movie.getTitle());

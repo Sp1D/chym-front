@@ -46,7 +46,7 @@ public class MainController {
     UserRepo userRepo;
 
     final int cols = 6;
-    final Integer DEF_PAGESIZE = 10;
+    final Integer DEF_PAGESIZE = 24;
     final SortOrder DEF_SORTORDER = SortOrder.TITLE;
 
     @RequestMapping(method = RequestMethod.GET, value = "/")
@@ -65,14 +65,20 @@ public class MainController {
             direction = Direction.ASC;
         }
         Sort sort = new Sort(direction, sortProperty);
-        
-        Page<MovieFull> moviesPage = movieRepo.findAll(new PageRequest(page, pagesize, sort));        
-        movies = new LinkedList<MovieFull>(moviesPage.getContent());
 
-        if (favoritesFirst && user != null && user.getFavorites() != null) {
-            movies.removeAll(user.getFavorites());
-            movies.addAll(0, user.getFavorites());
+        Page<MovieFull> moviesPage;
+        if (favoritesFirst && user != null) {
+            moviesPage = movieRepo.findFavoritesAndAll(user, new PageRequest(page, pagesize, sort));
+        } else {
+            moviesPage = movieRepo.findAll(new PageRequest(page, pagesize, sort));
+
         }
+        movies = new LinkedList<>(moviesPage.getContent());
+
+//        if (favoritesFirst && user != null && user.getFavorites() != null) {
+//            movies.removeAll(user.getFavorites());
+//            movies.addAll(0, user.getFavorites());
+//        }
 
 //        Number of rows on the main page depending of columns number
         int rows = movies.size() % cols > 0 ? movies.size() / cols + 1 : movies.size() / 3;
@@ -88,10 +94,11 @@ public class MainController {
         model.addAttribute("pagesCurrent", moviesPage.getNumber());
         model.addAttribute("pagesFirst", moviesPage.isFirst());
         model.addAttribute("pagesLast", moviesPage.isLast());
-        
-        List<MovieFull> testlist = movieRepo.findAllll(user, new PageRequest(0, pagesize)).getContent();
-        model.addAttribute("testlist", testlist);
-                
+
+//        if (user != null) {
+//            Page<MovieFull> testlist = movieRepo.findFavoritesAndAll(user, new PageRequest(page, pagesize, sort));
+//            model.addAttribute("testlist", testlist.getContent());
+//        }
         return "home";
     }
 
@@ -130,7 +137,7 @@ public class MainController {
         int pageSize = DEF_PAGESIZE;
         if (params.get("s") != null) {
             try {
-                pageSize = Integer.valueOf(params.get("s")[0]);                
+                pageSize = Integer.valueOf(params.get("s")[0]);
             } catch (Exception e) {
             }
         } else if (user != null) {
@@ -171,7 +178,7 @@ public class MainController {
             }
         } else if (user != null) {
             favoritesFirst = user.isFavoritesFirst();
-        }        
+        }
         result.put("favoritesFirst", favoritesFirst);
         if (user != null && user.isFavoritesFirst() != favoritesFirst) {
             user.setFavoritesFirst(favoritesFirst);
