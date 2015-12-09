@@ -25,47 +25,143 @@
             </style>
         </head>
         <body>
-            <!--<a class="episeries epiback" href="<c:url value="/" />"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>-->
-            <div class="episeries"><c:out value="${seriesTitle}"/></div>
-        <div style="clear:left; height:15px;"></div>
+            <div class="navbar navbar-inverse navbar-fixed-top navbar-default">
+                <div class="navbar-header"><a class="navbar-brand" href="#">Project name</a>
 
-        <c:forEach var="seasonNumber" begin="1" end="${lastSeason}">
-            <c:set var="season" value="${lastSeason-seasonNumber+1}"/>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="glyphicon glyphicon-bar"></span>
+                        <span class="glyphicon glyphicon-bar"></span>
 
-            <div class="episeason"><c:out value="${season}"/>&nbsp;season</div>
-            <div style="clear:left; height:20px;"></div>
+                        <span class="glyphicon glyphicon-bar"></span>
+                    </button>
+                </div>
+                <div class="container">
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#" class="">Home</a>
 
-            <c:forEach var="episode" items="${episodesList}">
-                <c:if test="${episode.getSeason() == season}">
-                    <div class="row">
-                        <div class="col-lg-12">                
-                            <div class="epiepisode"><c:out value="${episode.getEpisode()}"/></div>
-                            <div class="epiposter">
-                                <img class="epiposter-img" src="<c:url value="${episode.getPoster()}"/>" alt="poster">
-                                <div class="btn-group">
-                                    <button class="btn  btn-success dropdown-toggle btn-sm btn-episode" data-toggle="dropdown">Download <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <c:forEach var="torrent" items="${episode.getTorrents()}">
-                                            <li><a href="<c:url value="${torrent.getTorrent()}"/>"><c:out value="${torrent.getTracker().getName()}"/>&nbsp;<c:out value="${torrent.getQuality()}"/> </a></li>                                        
-                                            </c:forEach>
-                                    </ul>                    
+                            </li>
+                            <li><a href="#about" class="">About</a>
+
+                            </li>
+                            <li><a href="#contact" class="">Contact</a>
+
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.navbar-collapse -->
+                </div>
+            </div>
+            <div class="container target">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="page-header text-center">
+                            <h2>Movie Title<small> (2015)</small></h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p class="text-right">
+                            <img src="http://placehold.it/350X350" class="img-responsive" align="right">
+                        </p>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra
+                                        varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt
+                                        condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis
+                                        nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor
+                                        accumsan. Aliquam in felis sit amet augue.</td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">Genre </b>Comedy, Porn, Detective, Fantasy</td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">IMDB </b>9.9</td>
+                                </tr>
+                                <tr>
+                                    <td><b class="">Last release </b>31 Feb 2015</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-4">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+                                            Season 3
+                                        </a>
+                                    </h4>
+
                                 </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>10</td>
+                                                    <td>Episode title <span class="label label-info">new</span></td>
+                                                </tr>
+                                            </tbody></table>
 
+                                    </div>
+                                </div>
                             </div>
-                            <div style="">
-                                <p><strong><c:out value="${episode.getTitle()}"/></strong><br><span class="glyphicon glyphicon-time"></span><em>&nbsp;<c:out value="${episode.getReleased()}"/></em><br>
-                                        <c:out value="${episode.getPlot()}"/>
-                                </p>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Collapsible Group Item #2
+                                        </a>
+                                    </h4>
+
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                        dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                        wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                        vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                        synth nesciunt you probably haven't heard of them accusamus labore sustainable
+                                        VHS.</div>
+                                </div>
                             </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="headingThree">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Collapsible Group Item #3
+                                        </a>
+                                    </h4>
 
-
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                    <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                                        richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                        dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                        assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore
+                                        wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+                                        vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+                                        synth nesciunt you probably haven't heard of them accusamus labore sustainable
+                                        VHS.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </c:if>
-            </c:forEach>
-        </c:forEach>
-
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="<c:url value="/static/js/bootstrap.min.js"></c:url>"></script>
+                </div>
+                <!-- /container -->
+            </div>
+            <script src="http://code.jquery.com/jquery-latest.js"></script>
+            <script src="<c:url value="/static/js/bootstrap.min.js"></c:url>"></script>
     </body>
 </html>
