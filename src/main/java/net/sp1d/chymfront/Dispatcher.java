@@ -8,6 +8,9 @@ package net.sp1d.chymfront;
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import net.sp1d.chymfront.RootConfig;
+import net.sp1d.chymfront.Settings;
+import net.sp1d.chymfront.WebConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
@@ -33,13 +36,15 @@ public class Dispatcher extends AbstractAnnotationConfigDispatcherServletInitial
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext); //To change body of generated methods, choose Tools | Templates.        
+        super.onStartup(servletContext); 
         try {
-            Settings.init(servletContext);            
+            Settings.init(servletContext);               
         } catch (IOException e) {
             throw new ServletException(e);
         }
 
     }
+    
+    
 
 }

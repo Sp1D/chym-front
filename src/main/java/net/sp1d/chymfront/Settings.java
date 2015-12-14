@@ -30,7 +30,7 @@ public class Settings {
                 throw new IOException("Cant find properties in file " + FILENAME);
             }
             properties.load(settingsStream);         
-        }
+        }        
     }
 
     public static Properties getSettings() {

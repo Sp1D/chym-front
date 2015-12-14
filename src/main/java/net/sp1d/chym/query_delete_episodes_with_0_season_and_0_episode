@@ -1,0 +1,10 @@
+delete from episodes_actors where Episode_id IN (select id from episodes where season = 0 and episode = 0);
+delete from episodes_countrys where Episode_id IN (select id from episodes where season = 0 and episode = 0);
+delete from episodes_directors where Episode_id IN (select id from episodes where season = 0 and episode = 0);
+delete from episodes_genres where Episode_id IN (select id from episodes where season = 0 and episode = 0);
+delete from episodes_languages where Episode_id IN (select id from episodes where season = 0 and episode = 0);
+delete from episodes_writers where Episode_id IN (select id from episodes where season = 0 and episode = 0);
+
+update torrents set episode_id = NULL where episode_id IN (select id from episodes where season = 0 and episode = 0);
+
+delete from episodes where season = 0 and episode = 0;
