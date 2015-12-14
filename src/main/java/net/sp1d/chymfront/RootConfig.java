@@ -7,6 +7,7 @@ package net.sp1d.chymfront;
 
 import java.util.Date;
 import java.util.Properties;
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -15,6 +16,8 @@ import net.sp1d.chym.FetchNSave;
 import net.sp1d.chym.MovieFetcherOMDB;
 import net.sp1d.chym.Service;
 import net.sp1d.chym.abstractclasses.AbstractFetcher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -37,17 +40,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories("net.sp1d.chym.repos")
 @EnableTransactionManagement
 public class RootConfig {
-        
+    
+    Logger log = LoggerFactory.getLogger(RootConfig.class);
     
     @Bean
     DataSource dataSource() {
         DataSource ds = null;
         try {            
             InitialContext ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("jdbc/MySQLDataSource");            
+            Context envCtx = (Context) ctx.lookup("java:comp/env");
+            ds = (DataSource) envCtx.lookup("jdbc/MySQLDataSource");            
             
         } catch (NamingException namingException) {
-            System.out.println("can't init datasource (configure me to use logging)");            
+            log.error("can't init datasource", namingException);                     
         }
         return ds;
     }

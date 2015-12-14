@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/chymfront"/>
+<Context  path="/chymfront">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxIdle="4" maxTotal="8" name="jdbc/MySQLDataSource" password="chym" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/chym" username="chym"/>
+</Context>
