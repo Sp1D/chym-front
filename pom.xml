@@ -18,7 +18,7 @@
     <dependencies>
         <!--=======LOGGING=========-->
         
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jcl</artifactId>
             <version>1.7.12</version>
@@ -29,7 +29,7 @@
                 </exclusion>
             </exclusions>
         </dependency>-->
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.7.12</version>
@@ -58,7 +58,7 @@
             <version>2.4.1</version>
         </dependency>
         
-         <dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.4.1</version>
@@ -138,6 +138,19 @@
             <version>${spring-version}</version>
         </dependency>  
         
+<!--        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring-version}</version>
+        </dependency>  
+        
+        <dependency>
+            <groupId>org.codehaus.fabric3.api</groupId>
+            <artifactId>commonj</artifactId>
+            <version>1.1.1</version>
+        </dependency>-->
+  
+        
         <!--=====HIBERNATE=====-->
         <!--        <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -174,7 +187,7 @@
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>            
         </dependency>
-<!--        <dependency>
+        <!--        <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version></version>            
@@ -197,6 +210,11 @@
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
             <version>3.3.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
         
         

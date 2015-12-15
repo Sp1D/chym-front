@@ -21,11 +21,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -41,7 +43,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class RootConfig {
     
-    Logger log = LoggerFactory.getLogger(RootConfig.class);
+//    Logger log = LoggerFactory.getLogger(RootConfig.class);
     
     @Bean
     DataSource dataSource() {
@@ -52,7 +54,7 @@ public class RootConfig {
             ds = (DataSource) envCtx.lookup("jdbc/MySQLDataSource");            
             
         } catch (NamingException namingException) {
-            log.error("can't init datasource", namingException);                     
+//            log.error("can't init datasource", namingException);                     
         }
         return ds;
     }
@@ -104,16 +106,19 @@ public class RootConfig {
     }
     
     @Bean
+//        (destroyMethod = "shutdown")
     TaskScheduler taskScheduler() {
-        ThreadPoolTaskScheduler ts = new ThreadPoolTaskScheduler();
+//        TimerManagerTaskScheduler ts = new TimerManagerTaskScheduler();
+//        ThreadPoolTaskScheduler ts = new ThreadPoolTaskScheduler();
+        ConcurrentTaskScheduler ts = new ConcurrentTaskScheduler();
+
+//        ts.setDaemon(true);
+//        ts.initialize();
         
-        
-        ts.setDaemon(true);
-        ts.initialize();
-        
+                
 //        Check new titles at all trackers
         
-        ts.scheduleWithFixedDelay(new Runnable() {
+        ts.scheduleWithFixedDelay(new Runnable() {            
             @Override
             public void run() {
                 service().checkNewTitlesAllTrackers();
